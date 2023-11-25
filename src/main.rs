@@ -4,6 +4,7 @@ mod pages;
 mod components;
 mod models;
 mod schema;
+mod repositories;
 
 #[function_component(App)]
 fn app() -> Html {

@@ -7,7 +7,7 @@ edition = "2021"
 
 [dependencies]
 chrono = "0.4.31"
-diesel = "2.1.4"
+diesel = { version = "2.1.4", features = ["chrono"] }
 diesel-async = { version = "0.4.1", features = ["postgres"] }
 gloo-console = "0.3.0"
 validator = { version = "0.16.1", features = ["derive"] }
