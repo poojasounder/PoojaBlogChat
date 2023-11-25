@@ -2,6 +2,8 @@ use yew::prelude::*;
 
 mod pages;
 mod components;
+mod models;
+mod schema;
 
 #[function_component(App)]
 fn app() -> Html {
