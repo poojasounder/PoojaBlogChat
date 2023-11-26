@@ -8,13 +8,26 @@ services:
       - POSTGRES_PASSWORD=postgres
       - POSTGRES_DB=app_db
     command: ["postgres", "-c", "log_statement=all"]
+<<<<<<< HEAD
   redis:
     image: redis:latest
+=======
+  
+  redis:
+    image: redis:latest
+
+>>>>>>> 7b19c02a95b624f4b82302640aefb65fd9432bfa
   app:
     build: .
     environment:
       - DATABASE_URL=postgres://postgres:postgres@postgres/app_db
     ports:
+<<<<<<< HEAD
       - 8888:8000
     volumes:
       - ./:/app/
+=======
+      - 8000:8000
+    volumes:
+      - ./:/app/
+>>>>>>> 7b19c02a95b624f4b82302640aefb65fd9432bfa
