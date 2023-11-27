@@ -5,7 +5,8 @@ use rocket::response::status::{Custom, NoContent};
 use rocket::serde::json::{json, Json, Value};
 use rocket_db_pools:: Connection;
 
-use crate::rocket_routes::DbConn;
+//use crate::rocket_routes::DbConn;
+use crate::DbConn;
 
 #[rocket::get("/rustaceans")]
 pub async fn get_rustaceans(mut db: Connection<DbConn>) -> Result<Value,Custom<Value>>{
