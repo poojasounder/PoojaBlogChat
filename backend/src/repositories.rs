@@ -36,3 +36,28 @@ impl RustaceanRepository {
         diesel::delete(rustaceans::table.find(id)).execute(c).await
     }
 }
+
+
+pub struct UserRepository;
+
+impl UserRepository{
+    pub async fn create(c: &mut AsyncPgConnection, new_user: NewUser, role_codes: Vec<String>) -> QueryResult<User> {
+        let user = diesel::insert_into(users::table)
+            .values(new_user)
+            .get_result(c)
+            .await;
+
+        Ok(user)
+    }
+}
+
+pub struct RoleRepository;
+
+impl RoleRepository{
+    pub async fn create(c: &mut AsyncPgConnection, new_role: NewRole) -> QueryResult<Role> {
+        diesel::insert_into(roles::table)
+            .values(new_role)
+            .get_result(c)
+            .await
+    }
+}

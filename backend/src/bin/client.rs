@@ -2,7 +2,8 @@ use clap::{Command, Arg};
 
 extern crate backend;
 
-fn main() {
+#[tokio::main]
+async fn main() {
     let matches= Command::new("backend")
         .about("backend commands")
         .arg_required_else_help(true)
@@ -34,9 +35,15 @@ fn main() {
         .get_matches();
     match matches.subcommand(){
         Some(("users", sub_matches)) => match sub_matches.subcommand(){
-            Some(("create", _)) => {},
-            Some(("list", _)) => {},
-            Some(("delete", _)) => {},
+            Some(("create", sub_matches)) => backend::commands::create_user(
+                sub_matches.get_one::<String>("username").unwrap().to_owned(),
+                sub_matches.get_one::<String>("password").unwrap().to_owned(),
+                sub_matches.get_many::<String>("roles").unwrap().map(|v| v.to_owned()).collect(),
+            ).await,
+            Some(("list", _)) => backend::commands::list_users().await,
+            Some(("delete", _)) => backend::commands::delete_user(
+                sub_matches.get_one::<i32>("username").unwrap().to_owned(),
+            ).await,
             _ => {},
         },
         _ => {},
