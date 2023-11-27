@@ -22,7 +22,7 @@ pub struct NewRustacean {
     pub email: String,
 }
 
-#[derive(Queryable, Debug)]
+#[derive(Queryable, Debug, Identifiable)]
 pub struct User {
     pub id: i32,
     pub username: String,
@@ -37,7 +37,7 @@ pub struct NewUser {
     pub password: String,
 }
 
-#[derive(Queryable)]
+#[derive(Queryable,Debug,Identifiable)]
 pub struct Role {
     pub id: i32,
     pub code: String,
@@ -53,9 +53,11 @@ pub struct NewRole {
     pub name: String,
 }
 
-#[derive(Queryable)]
+#[derive(Queryable, Associations, Identifiable, Debug)]
 #[diesel(belongs_to(User))]
 #[diesel(belongs_to(Role))]
+
+#[diesel(table_name=users_roles)]
 pub struct UserRole {
     pub id: i32,
     pub user_id: i32,

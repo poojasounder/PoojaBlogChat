@@ -1,6 +1,6 @@
 use diesel_async::{AsyncPgConnection,AsyncConnection};
 use crate::models::NewUser;
-use crate::repositories::UserRepository;
+use crate::repositories::{UserRepository, RoleRepository};
 
 async fn load_db_connection() -> AsyncPgConnection {
     let database_url = std::env::var("DATABASE_URL")
@@ -14,6 +14,9 @@ pub async fn create_user(username: String, password: String, role_codes: Vec<Str
     let new_user = NewUser {username, password};
     let user = UserRepository::create(&mut c, new_user, role_codes).await.unwrap();
     println!("User created {:?}", user);
+
+    let roles = RoleRepository::find_by_user(&mut c, &user).await.unwrap();
+    println!("Roles assigned {:?}", roles);
 }
 
 pub async fn list_users() {
