@@ -1,4 +1,4 @@
-
+mod auth;
 mod models;
 mod schema;
 mod repositories;
