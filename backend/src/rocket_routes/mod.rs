@@ -5,8 +5,10 @@ use rocket::request::{FromRequest, Outcome};
 use rocket::response::status::Custom;
 use rocket::serde::json::{json, Value};
 use rocket_db_pools::deadpool_redis::redis::AsyncCommands;
+use rocket_db_pools::Connection;
 
 use crate::models::User;
+use crate::repositories::UserRepository;
 
 pub mod rustaceans;
 pub mod authorization;
@@ -42,7 +44,7 @@ impl <'r> FromRequest<'r> for User {
             let result = cache.get::<String, i32>(format!("sessions/{}",header_value[1])).await;
             if let Ok(user_id) = result {
                 if let Ok(user)= UserRepository::find(&mut db,user_id).await{
-                    return Outcome::Sucess(user);
+                    return Outcome::Success(user);
                 }
                 
             }
