@@ -1,18 +1,42 @@
 use yew::prelude::*;
 
-mod pages;
-mod components;
+//Create the main app that will load all other Components
+pub struct App {
+}
 
-#[function_component(App)]
-fn app() -> Html {
-    html! {
-        <>
-        <div class="background">
-            <pages::login::Login />
-        </div>
-        </>
+//Message enum that is used for managing the life cycle of Components
+pub enum Msg {
+}
+
+//Implement the Component interface
+impl Component for App {
+    type Message = Msg;
+    type Properties = ();
+
+    //Create a new App
+    fn create(_ctx: &Context<Self>) -> Self {
+        App {
+        }
+    }
+
+    fn update(&mut self, _ctx: &Context<Self>, msg: Self::Message) -> bool {
+        false
+    }
+
+    fn view(&self, _ctx: &Context<Self>) -> Html {
+        //Creates The HTML that will show up in the browser.
+        html! {
+            <div class="background">
+        
+            <p> {"Hello World"} </p>
+            </div>
+        }
     }
 }
+
 fn main() {
+    //Create the logger
+    wasm_logger::init(wasm_logger::Config::new(log::Level::Trace));
+    //Start the Yew framework
     yew::Renderer::<App>::new().render();
 }
