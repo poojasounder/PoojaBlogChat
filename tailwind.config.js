@@ -13,21 +13,20 @@ module.exports = {
         'ct-blue-600': '#2363eb',
         'ct-yellow-600': '#f9d13e',
         'ct-red-500': '#ef4444',
-    },
-    fontFamily: {
-      Poppins: ['Poppins, sans-serif'],
-    },
-    container: {
-      center: true,
-      padding: '1rem',
-      screens: {
-        lg: '1125px',
-        xl: '1125px',
-        '2xl': '1125px',
+      },
+      fontFamily: {
+        Poppins: ['Poppins, sans-serif'],
+      },
+      container: {
+        center: true,
+        padding: '1rem',
+        screens: {
+          lg: '1125px',
+          xl: '1125px',
+          '2xl': '1125px',
+        },
       },
     },
   },
-},
-plugins: [],
-}
-
+  plugins: [],
+};
